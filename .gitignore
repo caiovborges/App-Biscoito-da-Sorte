@@ -15,3 +15,8 @@ ios/build/
 
 # Sistema
 .DS_Store
+
+# Pastas do Android
+android/.gradle/
+android/app/.cxx/
+android/app/build/
