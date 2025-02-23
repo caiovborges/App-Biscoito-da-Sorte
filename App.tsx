@@ -1,131 +1,128 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import React, { useState } from "react";
+import {View, Text, StyleSheet, Image, TouchableOpacity,Alert } from "react-native";
 
-import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+function App(){
+  const [img, setImg] = useState(require('./src/biscoito.png'))
+  const [textofrase, setTextoFrase] = useState('');
+  const [frases,setfrases] = useState(["A sorte favorece os corajosos.",
+      "Grandes mudanças estão a caminho - esteja pronto!",
+     " O sucesso é a soma de pequenos esforços diários.",
+      "Acredite em você, e o universo abrirá caminhos inesperados.",
+     " A felicidade está onde você decide enxergá-la.",
+      "Cada novo dia é uma chance para recomeçar.",
+      "Seu esforço hoje será sua recompensa amanhã.",
+      "Seja a mudança que deseja ver no mundo.",
+      "Oportunidades surgem para quem está preparado.",
+      "Um sorriso pode abrir portas que nem mesmo a chave conseguiria.",
+      "A paciência e a perseverança te levarão longe.",
+      "O melhor ainda está por vir!",
+      "Pequenos gestos podem trazer grandes alegrias.",
+      "Você está mais perto do que imagina do seu sonho.",
+      "Boas energias atraem coisas incríveis - continue espalhando positividade!"]);
+  
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+  function quebrarBiscoito(){
+    let numeroAleatorio = Math.floor(Math.random()*frases.length )
+    let fraseEscolhida = frases[numeroAleatorio];
+    
+    
+    if(frases.length === 0){
+      setTextoFrase("Acabaram as mensagem da sorte, Volte Amanhã :)");
+      setImg(require('./src/biscoitoAberto.png'))
+      return
+      }
+      setTextoFrase(fraseEscolhida);
+      setImg(require('./src/biscoitoAberto.png'))
+      let novasFrases = frases.filter((_, index) => index !== numeroAleatorio);
+      setfrases(novasFrases);
+    }
 
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
+  function reiniciarBiscoito(){
+    setfrases([
+      "A sorte favorece os corajosos.",
+      "Grandes mudanças estão a caminho - esteja pronto!",
+     " O sucesso é a soma de pequenos esforços diários.",
+      "Acredite em você, e o universo abrirá caminhos inesperados.",
+     " A felicidade está onde você decide enxergá-la.",
+      "Cada novo dia é uma chance para recomeçar.",
+      "Seu esforço hoje será sua recompensa amanhã.",
+      "Seja a mudança que deseja ver no mundo.",
+      "Oportunidades surgem para quem está preparado.",
+      "Um sorriso pode abrir portas que nem mesmo a chave conseguiria.",
+      "A paciência e a perseverança te levarão longe.",
+      "O melhor ainda está por vir!",
+      "Pequenos gestos podem trazer grandes alegrias.",
+      "Você está mais perto do que imagina do seu sonho.",
+      "Boas energias atraem coisas incríveis - continue espalhando positividade!"
+    ]);
+    setTextoFrase("");
+    setImg(require('./src/biscoito.png'));
+  }
 
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  /*
-   * To keep the template simple and small we're adding padding to prevent view
-   * from rendering under the System UI.
-   * For bigger apps the reccomendation is to use `react-native-safe-area-context`:
-   * https://github.com/AppAndFlow/react-native-safe-area-context
-   *
-   * You can read more about it here:
-   * https://github.com/react-native-community/discussions-and-proposals/discussions/827
-   */
-  const safePadding = '5%';
-
-  return (
-    <View style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
+  
+  return(
+    <View style={styles.container}>
+      <Image
+      source={img}
+      style={styles.img}
       />
-      <ScrollView
-        style={backgroundStyle}>
-        <View style={{paddingRight: safePadding}}>
-          <Header/>
+
+      <Text style={styles.textofrase}>{textofrase}</Text>
+
+      <TouchableOpacity style={styles.botao} onPress={()=> quebrarBiscoito()}>
+        <View style={styles.btnArea}>
+          <Text style={styles.btnTexto}>Quebrar Biscoito</Text>
         </View>
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-            paddingHorizontal: safePadding,
-            paddingBottom: safePadding,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
+      </TouchableOpacity>
+
+      <TouchableOpacity style={[styles.botao, {marginTop: 15, borderColor: "#121212"}]} onPress={()=> reiniciarBiscoito()}>
+        <View style={styles.btnArea}>
+          <Text style={[styles.btnTexto, {color: "#121212"}]}>Reiniciar Biscoito</Text>
         </View>
-      </ScrollView>
+      </TouchableOpacity>
+
     </View>
-  );
+  )
 }
+
+
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  container:{
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
+  img:{
+    width: 230,
+    height: 230,
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
+  textofrase:{
+    fontSize: 20,
+    color: "#dd7b22",
+    margin: 30,
+    fontStyle: "italic",
+    textAlign: "center"
   },
-  highlight: {
-    fontWeight: '700',
+  botao:{
+    width: 230,
+    height: 50,
+    borderColor: "#dd7b22",
+    borderWidth: 2,
+    borderRadius: 25
   },
-});
-
+  btnArea:{
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  btnTexto:{
+    fontSize: 17,
+    fontWeight: "bold",
+    color: "#dd7b22"
+  }
+})
+  
 export default App;
+
