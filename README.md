@@ -30,6 +30,38 @@ Antes de começar, certifique-se de ter instalado em sua máquina:
 - Possibilidade de reiniciar para jogar novamente.
 - Interface simples e intuitiva.
 
+
+# 🚀 Como executar o projeto
+
+Siga os passos abaixo para rodar o projeto em sua máquina:
+
+## 📥 Clone o repositório:
+```bash
+git clone https://github.com/seu-usuario/App-Biscoito-da-Sorte.git 
+````
+
+## 📂 Navegue até a pasta do projeto:
+```bash
+cd AppBiscoito
+````
+
+## 📦 Instale as dependências:
+```bash
+npm install 
+````
+
+## ▶️ Execute o projeto:
+
+### Para Android:
+```bash
+npx react-native run-android
+```
+
+### Para iOS::
+```bash
+npx react-native run-ios
+```
+
 ## 🎨 Tecnologias utilizadas
 
 - React Native
